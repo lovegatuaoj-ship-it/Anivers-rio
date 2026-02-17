@@ -23,18 +23,19 @@ const App: React.FC = () => {
 
   const tabs = ['Visão Geral', 'Partidas', 'Estatísticas', 'Amigos', 'Prêmios', 'Clubes'];
 
+  // Array de imagens com as URLs atualizadas para as versões "inteiras" (9, 10, 11)
   const achievementImages = [
-    "https://i.ibb.co/Q7FqFkx2/image.png",
-    "https://i.ibb.co/7x7y35hb/image.png",
-    "https://i.ibb.co/q38Zt96n/image-8.png",
-    "https://i.ibb.co/DDyYzrR8/image-7.png",
-    "https://i.ibb.co/3ymWRVNz/image-6.png",
-    "https://i.ibb.co/q36xRZXr/image-5.png",
-    "https://i.ibb.co/MDZwpwwG/image-4.png",
-    "https://i.ibb.co/5gfJ01MC/image-3.png",
-    "https://i.ibb.co/Q3fCss23/image-2.png",
-    "https://i.ibb.co/JwTcnbhb/image-1.png",
-    "https://i.ibb.co/rf2rMr3L/image.png",
+    "https://i.ibb.co/Q7FqFkx2/image.png", // 1
+    "https://i.ibb.co/7x7y35hb/image.png", // 2
+    "https://i.ibb.co/q38Zt96n/image-8.png", // 3
+    "https://i.ibb.co/DDyYzrR8/image-7.png", // 4
+    "https://i.ibb.co/3ymWRVNz/image-6.png", // 5
+    "https://i.ibb.co/q36xRZXr/image-5.png", // 6
+    "https://i.ibb.co/MDZwpwwG/image-4.png", // 7
+    "https://i.ibb.co/5gfJ01MC/image-3.png", // 8
+    "https://i.ibb.co/ksx9YYRs/image-2.png", // 9 (ATUALIZADA)
+    "https://i.ibb.co/cS9yJpmp/image-1.png", // 10 (ATUALIZADA)
+    "https://i.ibb.co/fGdwtw9K/image.png",   // 11 (ATUALIZADA)
     "https://i.ibb.co/nsdYSrXW/2.png",
     "https://i.ibb.co/PvVkTtMT/1.png",
     "https://i.ibb.co/jk0MnSxt/Whats-App-Image-2026-02-17-at-11-00-19-1.jpg",
@@ -221,7 +222,7 @@ const App: React.FC = () => {
                     >
                       <img 
                         src={imgUrl} 
-                        alt={`Prêmio ${i}`} 
+                        alt={`Prêmio ${i + 1}`} 
                         className="w-full h-full object-cover filter brightness-90 group-hover:brightness-110" 
                       />
                     </div>
@@ -296,32 +297,39 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      {/* LIGHTBOX MODAL */}
+      {/* LIGHTBOX MODAL - UPDATED FOR FULL IMAGE VIEW WITHOUT CUTS */}
       {selectedImage && (
         <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-300"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 bg-black/95 backdrop-blur-sm animate-in fade-in duration-300"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="relative max-w-4xl w-full flex flex-col items-center gap-4 animate-in zoom-in-95 duration-300">
+          <div className="relative max-w-full max-h-full flex flex-col items-center animate-in zoom-in-95 duration-300">
+            {/* Botão de Fechar */}
             <button 
-              className="absolute -top-12 right-0 p-2 text-white hover:text-[#81b64c] transition-colors bg-white/5 rounded-full"
+              className="absolute -top-12 sm:top-0 sm:-right-12 p-2 text-white/50 hover:text-white transition-colors bg-white/5 sm:bg-transparent rounded-full z-[110]"
               onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
             >
-              <X size={32} />
+              <X size={36} strokeWidth={1.5} />
             </button>
+            
+            {/* Container da Imagem - Garantindo exibição completa com object-contain */}
             <div 
-              className="relative rounded-2xl overflow-hidden border-4 border-[#312e2b] shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+              className="relative max-w-full max-h-[90vh] rounded-lg shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10 flex items-center justify-center bg-[#1a1917]"
               onClick={(e) => e.stopPropagation()}
             >
               <img 
                 src={selectedImage} 
                 alt="Prêmio em destaque" 
-                className="max-h-[80vh] w-auto object-contain"
+                className="max-w-full max-h-[90vh] w-auto h-auto object-contain block"
               />
             </div>
-            <p className="text-gray-400 font-bold uppercase tracking-[0.3em] text-[10px] mt-2">
-              Conquista de Wagner-Godoi
-            </p>
+            
+            {/* Legenda Opcional */}
+            <div className="mt-4 text-center">
+              <p className="text-gray-400 font-black uppercase tracking-[0.4em] text-[10px] sm:text-xs">
+                Visualização Completa
+              </p>
+            </div>
           </div>
         </div>
       )}
