@@ -1,0 +1,8 @@
+{
+  "name": "ChessMaster Profile Dashboard",
+  "description": "A high-fidelity chess profile dashboard inspired by Chess.com, featuring rating stats, sparkline charts, and a Gemini-powered AI chess coach.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
